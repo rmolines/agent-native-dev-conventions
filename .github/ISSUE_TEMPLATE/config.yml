@@ -1,0 +1,5 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Read the spec first
+    url: https://rmolines.github.io/agent-native-dev-conventions/spec/v0.1/
+    about: The full spec with all 7 conventions, examples, and anti-patterns.
