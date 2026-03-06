@@ -1,3 +1,9 @@
+---
+title: Examples
+nav_order: 2
+permalink: /examples/
+---
+
 # Examples
 
 Reference project structures demonstrating the

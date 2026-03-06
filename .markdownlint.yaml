@@ -32,3 +32,7 @@ MD031: false
 
 # Allow lists without surrounding blank lines (too noisy in dense docs)
 MD032: false
+
+# Don't count YAML front matter title: as an h1 (Jekyll files use both front matter title and # heading)
+MD025:
+  front_matter_title: ""
