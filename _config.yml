@@ -1,0 +1,25 @@
+title: Agent-Native Dev Conventions
+description: A numbered, prescriptive framework for structuring software projects so AI agents can navigate them effectively.
+
+url: "https://rmolines.github.io"
+baseurl: "/agent-native-dev-conventions"
+
+remote_theme: just-the-docs/just-the-docs
+
+plugins:
+  - jekyll-remote-theme
+  - jekyll-redirect-from
+
+# just-the-docs configuration
+search_enabled: true
+heading_anchors: true
+color_scheme: light
+nav_sort: order
+
+# Exclude non-documentation files from the built site
+exclude:
+  - Makefile
+  - HANDOVER.md
+  - CHANGELOG.md
+  - examples/swift-spm/.claude
+  - examples/typescript-nextjs/.claude
