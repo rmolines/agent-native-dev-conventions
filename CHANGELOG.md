@@ -38,7 +38,9 @@ O v0.1-beta está agora formalizado como GitHub Release com URL canônica, e o r
 
 ### O que mudou
 
-O manifesto `spec/v0.1.md` agora é publicado automaticamente em `https://rmolines.github.io/agent-native-dev-conventions/spec/v0.1/` com sidebar de navegação via just-the-docs. A raiz redireciona para o spec.
+O manifesto `spec/v0.1.md` agora é publicado automaticamente em
+`https://rmolines.github.io/agent-native-dev-conventions/spec/v0.1/`
+com sidebar de navegação via just-the-docs. A raiz redireciona para o spec.
 
 ### Detalhes técnicos
 
