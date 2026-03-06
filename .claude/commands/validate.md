@@ -27,7 +27,8 @@ essa responsabilidade é do /ship-feature. -->
 
 - Procurar em `.claude/feature-plans/<nome>/plan.md`
 - Se não existir: exibir este erro e parar:
-  > "Nenhum `plan.md` encontrado em `.claude/feature-plans/<nome>/`. O `/validate` requer uma feature iniciada com `/start-feature`. Se a feature existe, especifique o nome manualmente: `/validate <nome>`"
+  > "Nenhum `plan.md` encontrado em `.claude/feature-plans/<nome>/`. O `/validate` requer uma feature iniciada com `/start-feature`.
+  > Se a feature existe, especifique o nome manualmente: `/validate <nome>`"
 
 ---
 

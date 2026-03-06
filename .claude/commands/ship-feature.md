@@ -17,7 +17,8 @@ Antes de qualquer passo, leia o `CLAUDE.md` do projeto e extraia:
 - **Comando de smoke test** → N/A (repo de docs — sem smoke test)
 - **Hot files do projeto** (arquivos modificados por quase toda feature)
 
-Se o CLAUDE.md não listar hot files explicitamente: inferir pelos arquivos de CI e configuração presentes no repo (ex: `.github/workflows/`, `docker-compose.yml`, `Makefile`, arquivos de config principal).
+Se o CLAUDE.md não listar hot files explicitamente: inferir pelos arquivos de CI e configuração presentes no repo
+(ex: `.github/workflows/`, `docker-compose.yml`, `Makefile`, arquivos de config principal).
 Se o CLAUDE.md não especificar comandos de build/teste/smoke test: usar `plan.md` como fonte secundária.
 Se nenhum dos dois tiver: perguntar ao usuário antes de prosseguir.
 
