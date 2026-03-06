@@ -1,0 +1,5 @@
+config: .markdownlint.yaml
+
+# Planning artifacts — not published docs, excluded from lint
+ignores:
+  - ".claude/feature-plans/**"
