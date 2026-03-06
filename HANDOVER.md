@@ -4,6 +4,52 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — cli-extractor
+
+### O que foi feito
+
+- Implementado `cli/src/extractor.ts`: lê `CLAUDE.md` + `.claude/rules/*.md`, extrai stack
+  (seção `## Stack`), hot files (regex de backtick paths), invariantes (padrões imperativos:
+  Never/Always/nunca/sempre/must); caps: 15 hot files, 20 invariants
+- Substituído stub `generate.ts` pelo uso do extrator — escreve `.agent-index.md` com
+  3 seções: `## Stack`, `## Hot Files`, `## Invariants`
+- 22 testes com `node:test`: funções unitárias + edge cases (dir vazio, sem rules/, caps, dedup)
+- `make check` falhou inicialmente por `.agent-index.md` gerados durante testes no disco —
+  corrigido adicionando exclusão no Makefile + `.gitignore` (raiz + cli/)
+- PR #13 mergeado, CI + Pages deploy verdes
+
+### Decisões tomadas
+
+- Extrator é project-type-agnostic: só lê CLAUDE.md + rules/ genéricos; tipo-específico
+  (Swift, TS) fica em `cli-project-types` (feature #3)
+- Hot files via regex `` `[\w./][\w./\-]*\.\w{1,10}` `` — inicialmente restringia a paths
+  começando com `.` ou `/`; relaxado para capturar `src/index.ts` etc.
+- Contexto do hot file = resto da linha após remover backtick-paths e markers (markdown list)
+- Output format: blank line após `# Agent Index` obrigatório para MD022 (markdownlint)
+
+### Armadilhas encontradas
+
+- Regex de hot files com `/^[./]/` restrição deixa de fora `src/index.ts` (sem prefixo).
+  Fix: usar `/^[\w./]/` — qualquer path com extensão válida
+- Arquivos gerados em disco (`.agent-index.md`) são capturados pelo glob `**/*.md` do lint
+  mesmo não sendo commitados. Fix: excluir explicitamente no Makefile com `"!.agent-index.md"`
+
+### Próximos passos
+
+- `/start-feature cli-project-types` — extractors por tipo de projeto: Swift/SPM e TypeScript/Next.js
+- `/start-feature sessionstart-hook` (dep: cli-extractor ✅)
+- `/start-feature adoption-guide` (dep: cli-extractor ✅)
+
+### Arquivos-chave
+
+- `cli/src/extractor.ts` — lógica de extração completa (stack, hot files, invariants, format)
+- `cli/src/extractor.test.ts` — 22 testes unitários com fixtures inline
+- `cli/src/commands/generate.ts` — usa extrator, escreve .agent-index.md
+- `Makefile` — exclusão de `.agent-index.md` do lint
+- `.gitignore` — `.agent-index.md` ignorado na raiz
+
+---
+
 ## 2026-03-06 — cli-scaffold
 
 ### O que foi feito

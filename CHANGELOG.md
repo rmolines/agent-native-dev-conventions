@@ -1,5 +1,36 @@
 # Changelog
 
+## [feat] CLI agent-index extraction logic — 2026-03-06
+
+**Tipo:** feat
+**Tags:** cli, typescript, extractor, m2
+**PR:** [#13](https://github.com/rmolines/agent-native-dev-conventions/pull/13) · **Complexidade:** média
+
+### O que mudou
+
+`agent-index generate` agora produz um `.agent-index.md` real — documento hot-memory
+curado com stack, hot files e invariantes extraídos de `CLAUDE.md` + `.claude/rules/*.md`.
+O comando stub da feature anterior foi substituído pela lógica de extração completa.
+
+### Detalhes técnicos
+
+- `cli/src/extractor.ts` — extrai stack (seção `## Stack`), hot files (regex de backtick
+  paths, dedup, cap 15), invariantes (Never/Always/nunca/sempre/must, cap 20)
+- `cli/src/commands/generate.ts` — usa extrator, escreve o arquivo de saída
+- `cli/src/extractor.test.ts` — 22 testes unitários com fixtures inline e edge cases
+- `Makefile` + `.gitignore` — exclui `.agent-index.md` do lint e do git
+
+### Impacto
+
+- **Breaking:** Não
+
+### Arquivos-chave
+
+- `cli/src/extractor.ts` — ponto de extensão para `cli-project-types`
+- `cli/src/commands/generate.ts` — entry point do comando generate
+
+---
+
 ## [feat] CLI agent-index scaffold — 2026-03-06
 
 **Tipo:** feat

@@ -101,6 +101,26 @@ gh release create <tag> --repo rmolines/agent-native-dev-conventions ...
 
 ---
 
+## Regex de extração de paths em backticks: cuidado com o prefixo
+
+Ao extrair file paths de backticks em Markdown com regex, o padrão `\`([./][\w./\-]+\.\w+)\``
+(exigindo `.` ou `/` no início) deixa de fora paths relativos sem prefixo como `src/index.ts`.
+Fix: usar `\`([\w./][\w./\-]*\.\w{1,10})\`` — qualquer sequência começando com word char, dot
+ou slash, desde que termine com extensão de até 10 chars.
+
+---
+
+## Arquivos gerados em disco quebram `make check` mesmo não sendo commitados
+
+`markdownlint-cli2` com glob `**/*.md` captura qualquer `.md` existente no diretório de trabalho,
+inclusive arquivos listados no `.gitignore`. Se um arquivo gerado (ex: `.agent-index.md`) for
+criado durante testes ou validação manual, ele vai quebrar o lint na próxima execução de `make check`.
+
+Fix: excluir explicitamente no comando do Makefile com `"!.agent-index.md"` como padrão negativo.
+Não basta adicionar ao `.gitignore`.
+
+---
+
 ## Git preflight: false positive quando ambos os lados adicionam o mesmo arquivo novo
 
 O script `comm -12` de preflight detecta overlap quando a branch e `origin/main` adicionam
