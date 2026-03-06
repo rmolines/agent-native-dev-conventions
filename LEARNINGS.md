@@ -69,6 +69,17 @@ title do front matter no cômputo de h1.
 
 ---
 
+## `gh release create` — sempre especificar `--repo`
+
+`gh release create` sem `--repo` detecta o remoto do CWD. Se o terminal estiver em outro
+repo (ou worktree de outro projeto), a release é criada no lugar errado. Sempre usar:
+
+```bash
+gh release create <tag> --repo <owner>/<repo> ...
+```
+
+---
+
 ## Git preflight: false positive quando ambos os lados adicionam o mesmo arquivo novo
 
 O script `comm -12` de preflight detecta overlap quando a branch e `origin/main` adicionam

@@ -1,5 +1,35 @@
 # Changelog
 
+## [feat] v0.1-beta release: issue templates + GitHub Release — 2026-03-06
+
+**Tipo:** feat
+**Tags:** release, feedback, issue-templates, contributing
+**PR:** [#8](https://github.com/rmolines/agent-native-dev-conventions/pull/8) · **Complexidade:** simples
+
+### O que mudou
+
+O v0.1-beta está agora formalizado como GitHub Release com URL canônica, e o repositório tem estrutura para receber feedback externo organizado via issue templates.
+
+### Detalhes técnicos
+
+- `.github/ISSUE_TEMPLATE/config.yml` — desabilita issues em branco, força uso dos templates
+- `.github/ISSUE_TEMPLATE/principle-feedback.md` — template para feedback sobre princípio específico
+- `.github/ISSUE_TEMPLATE/missing-convention.md` — template para sugerir anti-padrão ou convenção ausente
+- `CONTRIBUTING.md` — como dar feedback, como abrir issue, o que não é escopo
+- GitHub Release `v0.1-beta` criada com release notes apontando para `https://rmolines.github.io/agent-native-dev-conventions/spec/v0.1/`
+
+### Impacto
+
+- **Breaking:** Não
+
+### Arquivos-chave
+
+- `.github/ISSUE_TEMPLATE/` — templates de issue
+- `CONTRIBUTING.md` — guia de contribuição
+- `github.com/rmolines/agent-native-dev-conventions/releases/tag/v0.1-beta` — release pública
+
+---
+
 ## [feat] GitHub Pages with just-the-docs — 2026-03-06
 
 **Tipo:** feat

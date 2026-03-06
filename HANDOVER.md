@@ -4,6 +4,40 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — versioning-beta
+
+### O que foi feito
+
+- Criados 3 issue templates em `.github/ISSUE_TEMPLATE/`: `config.yml`, `principle-feedback.md`, `missing-convention.md`
+- Criado `CONTRIBUTING.md` explicando como dar feedback e abrir issues
+- PR #8 mergeado em main
+- GitHub Release `v0.1-beta` criada via `gh release create` com notes apontando para Pages URL
+
+### Decisões tomadas
+
+- Release criada via CLI (`gh release`) em vez de MCP — mais simples e direto
+- `config.yml` desabilita issues em branco e guia usuários para os templates
+- Dois templates: um para feedback de princípio específico, outro para anti-padrão/convenção ausente
+
+### Armadilhas encontradas
+
+- `gh release create` sem `--repo` usa o remoto do diretório atual. Rodando de `agent-native-dev-conventions` mas sem flag, criou a release em `claude-kickstart` (o remote padrão detectado). Deletada e recriada com `--repo rmolines/agent-native-dev-conventions`
+
+### Próximos passos
+
+- M1 completo — todos os deliverables do milestone entregues
+- Aguardar feedback externo via issues
+- Eventual M2: CLI TypeScript para validar convenções automaticamente
+
+### Arquivos-chave
+
+- `.github/ISSUE_TEMPLATE/config.yml` — desabilita issues em branco
+- `.github/ISSUE_TEMPLATE/principle-feedback.md` — feedback de princípio
+- `.github/ISSUE_TEMPLATE/missing-convention.md` — sugestão de convenção ausente
+- `CONTRIBUTING.md` — guia de contribuição/feedback
+
+---
+
 ## 2026-03-06 — github-pages-setup
 
 ### O que foi feito
