@@ -103,10 +103,16 @@ gh release create <tag> --repo rmolines/agent-native-dev-conventions ...
 
 ## Regex de extração de paths em backticks: cuidado com o prefixo
 
-Ao extrair file paths de backticks em Markdown com regex, o padrão `\`([./][\w./\-]+\.\w+)\``
-(exigindo `.` ou `/` no início) deixa de fora paths relativos sem prefixo como `src/index.ts`.
-Fix: usar `\`([\w./][\w./\-]*\.\w{1,10})\`` — qualquer sequência começando com word char, dot
-ou slash, desde que termine com extensão de até 10 chars.
+Ao extrair file paths de backticks em Markdown com regex, o padrão exigindo `.` ou `/`
+no início deixa de fora paths relativos sem prefixo como `src/index.ts`.
+
+```text
+Restrito:  `([./][\w./\-]+\.\w+)`
+Correto:   `([\w./][\w./\-]*\.\w{1,10})`
+```
+
+Qualquer sequência começando com word char, dot ou slash, desde que termine com extensão
+de até 10 chars.
 
 ---
 
