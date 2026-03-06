@@ -4,6 +4,40 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — github-pages-setup
+
+### O que foi feito
+
+- Criado `_config.yml` com just-the-docs via `remote_theme`, excludes para `.claude/` dos exemplos
+- Criado `.github/workflows/pages.yml` — Jekyll build + deploy automático em push para main
+- Criado `index.md` com redirect Liquid: root → `/spec/v0.1/`
+- Adicionado front matter Jekyll a `spec/v0.1.md` (`nav_order: 1`) e `examples/README.md` (`nav_order: 2`)
+- Corrigido `.markdownlint.yaml`: `MD025 front_matter_title: ""` para suportar `title:` em front matter + `# heading` no corpo
+- Passo manual executado pelo usuário: Settings → Pages → Source: GitHub Actions
+- PRs: #5 (feature principal), #6 (tentativa enablement automático), #7 (revert para passo manual)
+
+### Decisões tomadas
+
+- `just-the-docs` via `remote_theme` (sem Gemfile) — zero dependências locais para o build
+- `enablement: true` no `configure-pages` não funciona com `GITHUB_TOKEN` padrão (`Resource not accessible by integration`) — requer permissões de admin que o token não tem; revertido para passo manual
+- `MD025 front_matter_title: ""` é necessário quando arquivos Jekyll têm `title:` no front matter E `# heading` no corpo — sem essa config, markdownlint conta os dois como dois h1
+
+### Próximos passos
+
+- `versioning-beta` — próxima feature do sprint M1 (deps: `github-pages-setup` ✅, `manifesto-exemplos` ✅)
+- Iniciar com: `/start-feature versioning-beta`
+
+### Arquivos-chave modificados
+
+- `_config.yml` — novo: Jekyll config com just-the-docs
+- `.github/workflows/pages.yml` — novo: build + deploy workflow
+- `index.md` — novo: redirect root → /spec/v0.1/
+- `spec/v0.1.md` — front matter Jekyll adicionado
+- `examples/README.md` — front matter Jekyll adicionado
+- `.markdownlint.yaml` — MD025 configurado para suportar front matter title
+
+---
+
 ## 2026-03-06 — manifesto-exemplos (examples/)
 
 **What was done:**

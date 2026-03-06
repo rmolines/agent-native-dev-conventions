@@ -51,6 +51,24 @@ This was documented in CVE-2025-59536. Mitigation: keep hook logic in external s
 
 ---
 
+## GitHub Pages: `configure-pages enablement: true` requer permissões de admin
+
+O parâmetro `enablement: true` da action `actions/configure-pages` tenta criar o Pages site
+via API, mas o `GITHUB_TOKEN` padrão não tem permissões suficientes para isso (`Resource not
+accessible by integration`). A ativação do GitHub Pages precisa ser feita manualmente em
+Settings → Pages → Source: GitHub Actions — ou via Personal Access Token com permissão de admin.
+
+---
+
+## markdownlint MD025 com Jekyll front matter
+
+Quando um arquivo Markdown tem `title:` no front matter YAML E um `# heading` no corpo,
+markdownlint (v0.40+) conta ambos como h1 e dispara MD025 "Multiple top-level headings".
+Fix: `MD025: front_matter_title: ""` no `.markdownlint.yaml` desabilita a detecção do
+title do front matter no cômputo de h1.
+
+---
+
 ## Git preflight: false positive quando ambos os lados adicionam o mesmo arquivo novo
 
 O script `comm -12` de preflight detecta overlap quando a branch e `origin/main` adicionam

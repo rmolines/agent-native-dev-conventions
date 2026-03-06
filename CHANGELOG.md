@@ -1,5 +1,34 @@
 # Changelog
 
+## [feat] GitHub Pages with just-the-docs — 2026-03-06
+
+**Tipo:** feat
+**Tags:** github-pages, jekyll, documentation, deployment
+**PR:** [#5](https://github.com/rmolines/agent-native-dev-conventions/pull/5) · **Complexidade:** baixa
+
+### O que mudou
+
+O manifesto `spec/v0.1.md` agora é publicado automaticamente em `https://rmolines.github.io/agent-native-dev-conventions/spec/v0.1/` com sidebar de navegação via just-the-docs. A raiz redireciona para o spec.
+
+### Detalhes técnicos
+
+- `.github/workflows/pages.yml` — Jekyll build + deploy automático em push para main
+- `_config.yml` — just-the-docs via `remote_theme`, excludes para dirs de exemplos
+- `index.md` — redirect Liquid: root → `/spec/v0.1/`
+- `spec/v0.1.md`, `examples/README.md` — front matter Jekyll (`nav_order`)
+- `.markdownlint.yaml` — `MD025 front_matter_title: ""` para suportar front matter title + `# heading` simultâneos
+
+### Impacto
+
+- **Breaking:** Não
+
+### Arquivos-chave
+
+- `_config.yml` — Jekyll config com just-the-docs
+- `.github/workflows/pages.yml` — build + deploy workflow
+
+---
+
 ## [feat] Examples: Swift/SPM and TypeScript/Next.js reference projects — 2026-03-06
 
 **Tipo:** feat
