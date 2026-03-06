@@ -1,0 +1,25 @@
+{
+  "name": "agent-index",
+  "version": "0.1.0",
+  "description": "CLI tool for generating agent-navigable context from projects following agent-native conventions",
+  "license": "MIT",
+  "type": "module",
+  "bin": {
+    "agent-index": "./dist/index.js"
+  },
+  "scripts": {
+    "build": "tsc",
+    "test": "node --test dist/commands/generate.test.js",
+    "dev": "node --loader ts-node/esm src/index.ts"
+  },
+  "dependencies": {
+    "commander": "^12.0.0"
+  },
+  "devDependencies": {
+    "@types/node": "^20.0.0",
+    "typescript": "^5.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
