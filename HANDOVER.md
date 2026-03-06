@@ -4,6 +4,52 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — cli-scaffold
+
+### O que foi feito
+
+- Criado `cli/` com scaffold completo do projeto TypeScript CLI `agent-index`
+- Entry point `agent-index` via `commander` com comando `generate` stub
+- `node:test` built-in como test runner (4 testes, zero deps extras)
+- Build: `tsc` com NodeNext modules + strict mode
+- Corrigido `.markdownlint-cli2.yaml` para excluir `cli/node_modules/`
+- Wrapeadas linhas longas pré-existentes em `CHANGELOG.md` e `HANDOVER.md`
+- PR #12 mergeado, CI + Pages deploy verdes
+
+### Decisões tomadas
+
+- `commander` como parser de CLI: padrão da indústria, zero lock-in
+- `node:test` (built-in Node 18+) em vez de jest/vitest: zero deps extras,
+  suficiente para testes unitários do scaffold
+- NodeNext module resolution: abordagem moderna para ESM em Node.js
+- CLI em `cli/` subdirectório do repo (não repo separado nesta fase) — o roadmap
+  diz "repo separado" mas o CLAUDE.md mapeia `cli/` neste repo; seguido o CLAUDE.md
+
+### Armadilhas encontradas
+
+- `gh pr create` em worktree detecta repo errado quando `upstream` remote existe
+  (detectou `claude-kickstart` em vez de `agent-native-dev-conventions`).
+  Fix: usar `--repo rmolines/agent-native-dev-conventions` explicitamente
+- `cli/node_modules/` não estava excluído do glob de lint — `make check` falhava
+  com 44 erros de `@types/node`, `commander` e `typescript` READMEs.
+  Fix: adicionar `cli/node_modules/**` ao `.markdownlint-cli2.yaml`
+
+### Próximos passos
+
+- `/start-feature cli-extractor` — lógica de extração: lê CLAUDE.md + rules/,
+  extrai hot files/atores/invariantes, gera `.agent-index.md`
+
+### Arquivos-chave
+
+- `cli/package.json` — config, bin `agent-index`, scripts build/test
+- `cli/tsconfig.json` — TypeScript NodeNext strict
+- `cli/src/index.ts` — entry point
+- `cli/src/commands/generate.ts` — comando `generate` stub
+- `cli/src/commands/generate.test.ts` — 4 testes node:test
+- `.markdownlint-cli2.yaml` — exclusão de `cli/node_modules/`
+
+---
+
 ## 2026-03-06 — versioning-beta
 
 ### O que foi feito

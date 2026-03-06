@@ -38,6 +38,23 @@ This was documented in CVE-2025-59536. Mitigation: keep hook logic in external s
 
 ---
 
+## markdownlint — excluir node_modules de subdiretórios CLI
+
+Ao adicionar um subprojeto Node.js (ex: `cli/`) em um repo que já usa `markdownlint-cli2`,
+o glob padrão `**/*.md` vai incluir `cli/node_modules/**/*.md` — causando dezenas de erros
+nos READMEs de `commander`, `typescript`, `@types/node`, etc.
+
+Fix: adicionar ao `.markdownlint-cli2.yaml`:
+
+```yaml
+ignores:
+  - "cli/node_modules/**"
+```
+
+Aplicar **na mesma feature** que adiciona o subprojeto para não quebrar `make check`.
+
+---
+
 ## markdownlint
 
 - Use `npx --yes markdownlint-cli2` to avoid requiring global install
@@ -69,13 +86,17 @@ title do front matter no cômputo de h1.
 
 ---
 
-## `gh release create` — sempre especificar `--repo`
+## `gh` em worktree com remote `upstream` — sempre especificar `--repo`
 
-`gh release create` sem `--repo` detecta o remoto do CWD. Se o terminal estiver em outro
-repo (ou worktree de outro projeto), a release é criada no lugar errado. Sempre usar:
+Comandos `gh` (como `gh release create`, `gh pr create`, `gh pr list`) sem `--repo`
+detectam o repo a partir do remote do CWD. Em worktrees que têm `upstream` apontando
+para outro repo (ex: `claude-kickstart`), `gh` pode escolher o repo errado.
+
+Sempre usar `--repo <owner>/<repo>` explicitamente em worktrees:
 
 ```bash
-gh release create <tag> --repo <owner>/<repo> ...
+gh pr create --repo rmolines/agent-native-dev-conventions ...
+gh release create <tag> --repo rmolines/agent-native-dev-conventions ...
 ```
 
 ---

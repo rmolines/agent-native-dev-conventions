@@ -1,5 +1,36 @@
 # Changelog
 
+## [feat] CLI agent-index scaffold — 2026-03-06
+
+**Tipo:** feat
+**Tags:** cli, typescript, m2
+**PR:** [#12](https://github.com/rmolines/agent-native-dev-conventions/pull/12) · **Complexidade:** simples
+
+### O que mudou
+
+Criado `cli/` com o scaffold TypeScript do `agent-index` CLI — ponto de entrada
+do M2. O comando `agent-index generate` funciona (stub), pronto para receber
+a lógica de extração na próxima feature.
+
+### Detalhes técnicos
+
+- `cli/package.json` — projeto Node.js ESM com `bin: agent-index`, scripts build/test
+- `cli/tsconfig.json` — TypeScript strict, NodeNext module resolution
+- `cli/src/index.ts` — entry point com `commander`
+- `cli/src/commands/generate.ts` — stub com `--output` e `--project-root`
+- `cli/src/commands/generate.test.ts` — 4 testes com `node:test` built-in
+- `.markdownlint-cli2.yaml` — `cli/node_modules/**` excluído do lint
+
+### Impacto
+
+- **Breaking:** Não
+
+### Arquivos-chave
+
+- `cli/src/commands/generate.ts` — ponto de extensão para `cli-extractor`
+
+---
+
 ## [feat] v0.1-beta release: issue templates + GitHub Release — 2026-03-06
 
 **Tipo:** feat
