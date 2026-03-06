@@ -9,7 +9,7 @@
   },
   "scripts": {
     "build": "tsc",
-    "test": "node --test dist/commands/generate.test.js",
+    "test": "node --test dist/commands/generate.test.js dist/extractor.test.js",
     "dev": "node --loader ts-node/esm src/index.ts"
   },
   "dependencies": {
