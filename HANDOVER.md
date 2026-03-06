@@ -4,6 +4,37 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — manifesto-principios (spec/v0.1.md)
+
+**What was done:**
+
+- Created `spec/v0.1.md` — the agent-native dev conventions manifesto v0.1-beta
+- 7 numbered, prescriptive principles for agent-navigable projects
+- Each principle includes: rule, code examples (Swift/TypeScript), anti-pattern, rationale
+- Shipped via PR #2, merged to main, CI passed
+
+**Key decisions:**
+
+- 7 principles derived from explore.md + discovery.md + three arxiv papers (2601.20404,
+  2602.20478, 2602.20048) rather than invented from scratch — grounded in evidence
+- Inline examples in spec (not a separate `examples/` dir) — examples/ are scoped to the
+  `manifesto-exemplos` feature
+- Used `Status: v0.1-beta — open for feedback` instead of italic emphasis to comply with
+  MD036 (markdownlint: no emphasis as heading)
+- `text` language tag for bare file-path code blocks to satisfy MD040
+
+**Files created:**
+
+- `spec/v0.1.md` — 371 lines, 7 principles
+
+**Next features (from sprint.md):**
+
+- `readme-problema` — README focused on the problem (independent, no deps)
+- `manifesto-exemplos` — detailed examples in `examples/swift-spm/` and
+  `examples/typescript-nextjs/` (depends on `manifesto-principios`)
+
+---
+
 ## 2026-02-27 — Bootstrap via /start-project
 
 **What was done:**

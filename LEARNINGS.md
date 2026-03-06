@@ -44,3 +44,7 @@ This was documented in CVE-2025-59536. Mitigation: keep hook logic in external s
 - `MD013` (line length) needs `tables: false` and `code_blocks: false` to avoid false positives
 - `MD024` (duplicate headings) should be disabled for `HANDOVER.md` — entries often have similar structure
 - `MD041` (first heading must be h1) breaks templates with frontmatter or `<!-- TODO -->` comments
+- `MD036` (no emphasis as heading): italic text on its own line (`_v0.1-beta_`) is flagged as
+  attempted heading. Use plain text or a different construct (e.g., `Status: v0.1-beta`)
+- `MD040` (fenced code language required): bare ``` blocks listing file paths need a language
+  tag — use `text` when no specific language applies
