@@ -4,6 +4,52 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — manifesto-exemplos (examples/)
+
+**What was done:**
+
+- Created `examples/` with two mock reference projects — Swift/SPM and TypeScript/Next.js
+- Each project demonstrates all 7 conventions with annotated CLAUDE.md, atomic rule files,
+  cold-memory docs with `<!-- refers-to: ... -->` annotations, and source stubs with
+  convention-over-description naming
+- Added link to `examples/` in the "Adopting these conventions" section of `spec/v0.1.md`
+- Shipped via PR #4, merged to main, CI passed
+
+**Key decisions:**
+
+- Mock projects (not compilable) — the value is in the structure and annotations, not
+  runnable code; reduces maintenance burden and keeps the repo focused on conventions
+- Two stacks chosen (Swift/SPM and TypeScript/Next.js) to match the inline snippets
+  already in `spec/v0.1.md` — consistent mental model for readers
+- `<!-- refers-to: path -->` annotation introduced in `.claude/docs/data-model.md` files
+  as a concrete demonstration of Convention VII (Document Decay by Reference)
+- Source stubs (`.swift`, `.ts`) include inline comments mapping each code decision to
+  its convention — makes the conventions actionable at code level, not just in CLAUDE.md
+
+**Files created:**
+
+- `examples/README.md` — índice + convention index table
+- `examples/swift-spm/CLAUDE.md` — Conv I–V
+- `examples/swift-spm/.claude/rules/auth.md` — Conv III–IV
+- `examples/swift-spm/.claude/rules/data.md` — Conv III–IV
+- `examples/swift-spm/.claude/docs/data-model.md` — Conv V, VII
+- `examples/swift-spm/Sources/App/Services/UserAuthService.swift` — Conv VI–VII
+- `examples/typescript-nextjs/CLAUDE.md` — Conv I–V
+- `examples/typescript-nextjs/.claude/rules/api.md` — Conv III–IV
+- `examples/typescript-nextjs/.claude/docs/data-model.md` — Conv V, VII
+- `examples/typescript-nextjs/src/lib/auth/session-service.ts` — Conv VI–VII
+- `examples/typescript-nextjs/src/app/api/users/route.ts` — Conv III, VI
+
+**Files modified:**
+
+- `spec/v0.1.md` — link para `examples/` na seção "Adopting"
+
+**Next features (from sprint.md):**
+
+- `github-pages-setup` — GitHub Pages + publicação automática
+
+---
+
 ## 2026-03-06 — readme-problema (README.md)
 
 **What was done:**
