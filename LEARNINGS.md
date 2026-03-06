@@ -48,3 +48,12 @@ This was documented in CVE-2025-59536. Mitigation: keep hook logic in external s
   attempted heading. Use plain text or a different construct (e.g., `Status: v0.1-beta`)
 - `MD040` (fenced code language required): bare ``` blocks listing file paths need a language
   tag — use `text` when no specific language applies
+
+---
+
+## Git preflight: false positive quando ambos os lados adicionam o mesmo arquivo novo
+
+O script `comm -12` de preflight detecta overlap quando a branch e `origin/main` adicionam
+o mesmo arquivo a partir de `/dev/null` com conteúdo idêntico. Não é conflito real — o
+`git rebase` faz skip do commit automaticamente ("skipped previously applied commit").
+Seguro prosseguir sem intervenção manual quando os diffs dos dois lados forem byte-a-byte idênticos.

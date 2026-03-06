@@ -1,5 +1,32 @@
 # Changelog
 
+## [improvement] README rewrite: problem-first — 2026-03-06
+
+**Tipo:** improvement
+**Tags:** readme, documentation, onboarding
+**PR:** [#3](https://github.com/rmolines/agent-native-dev-conventions/pull/3) · **Complexidade:** simples
+
+### O que mudou
+
+README.md reescrito para liderar com a fricção concreta que devs sentem ao usar agentes
+em projetos não estruturados, antes de apresentar qualquer solução.
+
+### Detalhes técnicos
+
+- `README.md` — removida seção "What this is" que misturava problema/solução; novo README
+  abre com cenário narrativo (agente navega às cegas), articula por que AGENTS.md não basta,
+  e apresenta o framework brevemente com link para `spec/v0.1.md`
+
+### Impacto
+
+- **Breaking:** Não
+
+### Arquivos-chave
+
+- `README.md` — reescrita completa
+
+---
+
 ## [feat] Manifesto v0.1 — 7 agent-native conventions — 2026-03-06
 
 **Tipo:** feat

@@ -4,6 +4,35 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-06 — readme-problema (README.md)
+
+**What was done:**
+
+- Rewrote `README.md` as problem-first: leads with concrete friction devs feel,
+  articulates why AGENTS.md/CLAUDE.md don't solve it, then briefly presents the framework
+- Removed the "What this is" section that mixed problem and solution at equal weight
+- Shipped via PR #3, merged to main, CI passed
+
+**Key decisions:**
+
+- Opening with a narrative scenario (agent reads wrong files, ruins refactor) instead of
+  abstract problem statement — makes the friction visceral before naming it
+- "The map doesn't exist yet" framing for AGENTS.md critique — acknowledges the pattern
+  exists while naming the missing optimization
+- Solution section kept deliberately brief (3 bullets + link) — README job is recognition,
+  not explanation
+
+**Files modified:**
+
+- `README.md` — full rewrite (problem-first)
+
+**Next features (from sprint.md):**
+
+- `manifesto-exemplos` — detailed examples in `examples/swift-spm/` and
+  `examples/typescript-nextjs/`
+
+---
+
 ## 2026-03-06 — manifesto-principios (spec/v0.1.md)
 
 **What was done:**
