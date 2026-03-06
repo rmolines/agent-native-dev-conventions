@@ -21,7 +21,9 @@ Newest entries at the top.
 
 ### Armadilhas encontradas
 
-- `gh release create` sem `--repo` usa o remoto do diretório atual. Rodando de `agent-native-dev-conventions` mas sem flag, criou a release em `claude-kickstart` (o remote padrão detectado). Deletada e recriada com `--repo rmolines/agent-native-dev-conventions`
+- `gh release create` sem `--repo` usa o remoto do diretório atual. Rodando de `agent-native-dev-conventions`
+  mas sem flag, criou a release em `claude-kickstart` (o remote padrão detectado).
+  Deletada e recriada com `--repo rmolines/agent-native-dev-conventions`
 
 ### Próximos passos
 
