@@ -1,10 +1,19 @@
 import { readFileSync, readdirSync, existsSync } from 'node:fs';
 import { join, basename } from 'node:path';
+import { detectSwiftSpm, extractSwiftSpm, type SwiftSpmInfo } from './extractors/swift-spm.js';
+import {
+  detectTypeScriptNextjs,
+  extractTypeScriptNextjs,
+  type TypeScriptNextjsInfo,
+} from './extractors/typescript-nextjs.js';
+
+export type ProjectTypeInfo = SwiftSpmInfo | TypeScriptNextjsInfo;
 
 export interface AgentIndex {
   stack: string[];
   hotFiles: HotFile[];
   invariants: Invariant[];
+  projectType?: ProjectTypeInfo;
 }
 
 export interface HotFile {
@@ -105,11 +114,20 @@ export function buildAgentIndex(projectRoot: string): AgentIndex {
     ...rulesFiles,
   ];
 
+  const projectType = detectProjectType(projectRoot);
+
   return {
     stack: extractStack(claudeMd),
     hotFiles: extractHotFiles(sources),
     invariants: extractInvariants(rulesDir),
+    projectType,
   };
+}
+
+function detectProjectType(projectRoot: string): ProjectTypeInfo | undefined {
+  if (detectSwiftSpm(projectRoot)) return extractSwiftSpm(projectRoot) ?? undefined;
+  if (detectTypeScriptNextjs(projectRoot)) return extractTypeScriptNextjs(projectRoot) ?? undefined;
+  return undefined;
 }
 
 export function formatAgentIndex(index: AgentIndex, generatedBy = 'agent-index v0.1.0'): string {
@@ -134,6 +152,30 @@ export function formatAgentIndex(index: AgentIndex, generatedBy = 'agent-index v
     lines.push('## Invariants', '');
     for (const { text, source } of index.invariants) {
       lines.push(`- ${text} _(${source})_`);
+    }
+    lines.push('');
+  }
+
+  if (index.projectType) {
+    lines.push('## Project Type', '');
+    const pt = index.projectType;
+    if (pt.type === 'swift-spm') {
+      lines.push(`- **Type:** Swift/SPM`);
+      lines.push(`- **Package:** ${pt.packageName}`);
+      if (pt.targets.length > 0) {
+        lines.push(`- **Targets:**`);
+        for (const t of pt.targets) lines.push(`  - \`${t.name}\` (${t.type})`);
+      }
+    } else if (pt.type === 'typescript-nextjs') {
+      lines.push(`- **Type:** TypeScript / ${pt.framework}`);
+      const scriptEntries = Object.entries(pt.scripts);
+      if (scriptEntries.length > 0) {
+        lines.push(`- **Scripts:**`);
+        for (const [k, v] of scriptEntries) lines.push(`  - \`${k}\`: \`${v}\``);
+      }
+      if (pt.keyDeps.length > 0) {
+        lines.push(`- **Key deps:** ${pt.keyDeps.join(', ')}`);
+      }
     }
     lines.push('');
   }
