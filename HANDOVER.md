@@ -4,6 +4,51 @@ Newest entries at the top.
 
 ---
 
+## 2026-03-07 — cli-project-types
+
+### O que foi feito
+
+- Criados `cli/src/extractors/swift-spm.ts` e `cli/src/extractors/typescript-nextjs.ts` —
+  extratores type-specific para Package.swift e tsconfig.json + package.json
+- Auto-detecção silenciosa em `buildAgentIndex`: `Package.swift` → swift-spm;
+  `tsconfig.json` → typescript-nextjs (Swift tem precedência quando ambos presentes)
+- Nova seção `## Project Type` no output formatado do `.agent-index.md`:
+  - Swift/SPM: nome do pacote + targets com tipo (executable/library/test/plugin)
+  - TypeScript/Next.js: framework detectado (Next.js, React, Vue, etc.) +
+    scripts relevantes (build/dev/test/lint) + key deps (zod, prisma, vitest, etc.)
+- Backward compatible: sem `Package.swift` nem `tsconfig.json`, output é idêntico ao anterior
+- 12 novos testes + 5 testes de auto-detecção em `extractor.test.ts` — total: 37/37 passando
+- PR #15 mergeado, CI verde
+
+### Decisões tomadas
+
+- Parser de `Package.swift` por regex (sem exec de `swift package describe`) — evita
+  dependência de toolchain Swift no runtime da CLI; funciona mesmo sem Swift instalado
+- Framework detection por lista ordenada de deps conhecidas (first-match): next > react > vue > nuxt > ...
+- Scripts relevantes: allowlist explícita (`build`, `dev`, `start`, `test`, `lint`, `typecheck`, `check`)
+  em vez de pegar todos — reduz ruído em projetos com muitos scripts internos
+- `AgentIndex.projectType` como campo opcional (`ProjectTypeInfo | undefined`) — zero
+  impacto em código que não usa o tipo específico
+
+### Armadilhas encontradas
+
+- Nenhuma nova nesta feature — execução limpa sem surpresas
+
+### Próximos passos
+
+- `/start-feature sessionstart-hook` — integração com Claude Terminal via hook SessionStart
+- `/start-feature adoption-guide` — guia "como aplicar ao seu projeto em 20 minutos"
+
+### Arquivos-chave
+
+- `cli/src/extractors/swift-spm.ts` — detecta + extrai Package.swift (nome, targets)
+- `cli/src/extractors/typescript-nextjs.ts` — detecta + extrai tsconfig.json + package.json
+- `cli/src/extractor.ts` — integração: detectProjectType() + seção no formatter
+- `cli/src/extractors/swift-spm.test.ts` — testes unitários Swift
+- `cli/src/extractors/typescript-nextjs.test.ts` — testes unitários TypeScript
+
+---
+
 ## 2026-03-06 — cli-extractor
 
 ### O que foi feito

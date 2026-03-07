@@ -1,5 +1,37 @@
 # Changelog
 
+## [feat] CLI project-type extractors for Swift/SPM and TypeScript/Next.js — 2026-03-07
+
+**Tipo:** feat
+**Tags:** cli, typescript, swift, extractor, m2
+**PR:** [#15](https://github.com/rmolines/agent-native-dev-conventions/pull/15) · **Complexidade:** média
+
+### O que mudou
+
+O `agent-index generate` agora detecta automaticamente o tipo de projeto e adiciona uma
+seção `## Project Type` ao `.agent-index.md` com metadados type-specific (targets Swift,
+framework e scripts TypeScript). Projetos sem `Package.swift` nem `tsconfig.json` não
+são afetados.
+
+### Detalhes técnicos
+
+- `cli/src/extractors/swift-spm.ts` — parseia `Package.swift` via regex: nome do pacote + targets com tipo
+- `cli/src/extractors/typescript-nextjs.ts` — parseia `package.json`: framework (next/react/vue/...), scripts allowlist, key deps
+- `cli/src/extractor.ts` — auto-detecção silenciosa em `buildAgentIndex` + nova seção no formatter
+- 37 testes unitários passando (12 novos)
+
+### Impacto
+
+- **Breaking:** Não — campo `projectType` é opcional; output idêntico quando nenhum tipo detectado
+
+### Arquivos-chave
+
+- `cli/src/extractors/swift-spm.ts` — novo
+- `cli/src/extractors/typescript-nextjs.ts` — novo
+- `cli/src/extractor.ts` — atualizado
+
+---
+
 ## [feat] CLI agent-index extraction logic — 2026-03-06
 
 **Tipo:** feat
