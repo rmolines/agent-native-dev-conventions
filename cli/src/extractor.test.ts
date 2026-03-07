@@ -102,6 +102,7 @@ describe('buildAgentIndex', () => {
     assert.deepEqual(index.stack, []);
     assert.deepEqual(index.hotFiles, []);
     assert.deepEqual(index.invariants, []);
+    assert.equal(index.projectType, undefined);
   });
 
   test('reads CLAUDE.md and rules/ from project root', () => {
@@ -115,6 +116,37 @@ describe('buildAgentIndex', () => {
     assert.deepEqual(index.stack, ['Node.js']);
     assert.ok(index.hotFiles.some((f) => f.path === 'src/main.ts'));
     assert.ok(index.invariants.some((i) => i.text.includes('Never commit secrets')));
+  });
+
+  test('detects Swift/SPM project type', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'agent-index-test-'));
+    writeFileSync(
+      join(dir, 'Package.swift'),
+      'let package = Package(name: "MyLib", targets: [.target(name: "MyLib", dependencies: [])])',
+    );
+    const index = buildAgentIndex(dir);
+    assert.ok(index.projectType);
+    assert.equal(index.projectType?.type, 'swift-spm');
+  });
+
+  test('detects TypeScript project type', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'agent-index-test-'));
+    writeFileSync(join(dir, 'tsconfig.json'), '{}');
+    writeFileSync(
+      join(dir, 'package.json'),
+      JSON.stringify({ scripts: { build: 'tsc' }, dependencies: { next: '14.0.0' } }),
+    );
+    const index = buildAgentIndex(dir);
+    assert.ok(index.projectType);
+    assert.equal(index.projectType?.type, 'typescript-nextjs');
+  });
+
+  test('Swift takes precedence over TypeScript when both present', () => {
+    const dir = mkdtempSync(join(tmpdir(), 'agent-index-test-'));
+    writeFileSync(join(dir, 'Package.swift'), 'let package = Package(name: "Mixed", targets: [])');
+    writeFileSync(join(dir, 'tsconfig.json'), '{}');
+    const index = buildAgentIndex(dir);
+    assert.equal(index.projectType?.type, 'swift-spm');
   });
 });
 
